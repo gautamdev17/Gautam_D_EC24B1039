@@ -1,49 +1,46 @@
-# 🔌 Electricity Bill Prediction using Random Forest
+# ⚡ Electricity Bill Prediction using Machine Learning
 
-This project predicts the monthly **Electricity Bill** of residential users using machine learning.  
-The dataset contains appliance counts, usage hours, tariff rates, and city/company info.
-
-We use a **Random Forest Regressor** to train the model and apply feature engineering to improve accuracy.
+This project predicts **monthly electricity bills** using machine learning models trained on residential appliance and usage data. We tried out multiple ML algorithms and ended up with a near-perfect prediction using **Random Forest Regressor**.
 
 ---
 
-## 🚀 Project Highlights
+## 📊 Model Performance (R² Score)
 
-- 📊 Model used: `RandomForestRegressor`
-- 🧠 R² Score: **0.99997**
-- 🔧 Feature Engineering applied
-- 📈 Graphs and heatmaps for analysis
-
----
-
-## 📁 Dataset Overview
-
-The dataset contains:
-
-| Feature         | Description                                            |
-|----------------|--------------------------------------------------------|
-| Fan            | Number of fans                                         |
-| Refrigerator   | Number of refrigerators                                |
-| AirConditioner | Number of air conditioners                             |
-| Television     | Number of TVs                                          |
-| Monitor        | Number of monitors                                     |
-| MotorPump      | Number of motor pumps                                  |
-| MonthlyHours   | Appliance usage hours per month                        |
-| TariffRate     | Electricity rate per unit (kWh)                        |
-| City           | City name (label encoded)                              |
-| Company        | Electricity board (label encoded)                      |
-| Month          | Month of the year                                      |
-| ElectricityBill| The actual electricity cost for the month              |
+| Model               | R² Score             |
+|--------------------|----------------------|
+| ✅ Random Forest    | **0.9999995336880136** |
+| Decision Tree      | 0.9999118343410605   |
+| Linear Regression  | 0.9956378681437017   |
 
 ---
 
-## 🧠 Feature Engineering
+## 📁 Dataset Description
 
-Feature engineering means creating **new useful features** from the existing ones to help the model learn better.
+The dataset includes appliance usage and electricity tariff info:
 
-### ✨ Custom Features Added
+| Feature         | Description                                             |
+|----------------|---------------------------------------------------------|
+| `Fan`            | Number of fans                                          |
+| `Refrigerator`   | Number of refrigerators                                 |
+| `AirConditioner` | Number of air conditioners                              |
+| `Television`     | Number of TVs                                           |
+| `Monitor`        | Number of monitors                                      |
+| `MotorPump`      | Number of motor pumps                                   |
+| `MonthlyHours`   | Total monthly hours appliances were used               |
+| `TariffRate`     | Rate per unit of electricity (₹ per kWh)               |
+| `City`           | Location (label encoded)                               |
+| `Company`        | Electricity board name (label encoded)                 |
+| `Month`          | Month of usage                                          |
+| `ElectricityBill`| Ground truth bill amount in ₹ for the month           |
 
-- `totalAppliances`:  
-  Total number of appliances in the house  
+---
+
+## ✨ Feature Engineering
+
+We created new features to help models learn better relationships.
+
+### 🔧 Custom Features
+
+- `totalAppliances`: total number of appliances in the house  
   ```python
   df["totalAppliances"] = df[['Fan', 'Refrigerator', 'AirConditioner', 'Television', 'Monitor', 'MotorPump']].sum(axis=1)
