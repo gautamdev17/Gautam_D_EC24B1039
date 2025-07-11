@@ -8,7 +8,7 @@ This project predicts **monthly electricity bills** using machine learning model
 
 | Model               | R² Score             |
 |--------------------|----------------------|
-| ✅ Random Forest    | **0.9999995336880136** |
+| ✅ Random Forest    | **0.9999755665317055** |
 | Decision Tree      | 0.9999118343410605   |
 | Linear Regression  | 0.9956378681437017   |
 
