@@ -1,83 +1,49 @@
-# ⚡ Electricity Bill Prediction using Machine Learning
+# 🔌 Electricity Bill Prediction using Random Forest
 
-This project is part of the **MachineHack - Electricity Cost Prediction Challenge**. The goal is to build a machine learning model that accurately predicts monthly electricity bills based on appliance usage, location, company, and tariff rates.
+This project predicts the monthly **Electricity Bill** of residential users using machine learning.  
+The dataset contains appliance counts, usage hours, tariff rates, and city/company info.
+
+We use a **Random Forest Regressor** to train the model and apply feature engineering to improve accuracy.
+
+---
+
+## 🚀 Project Highlights
+
+- 📊 Model used: `RandomForestRegressor`
+- 🧠 R² Score: **0.99997**
+- 🔧 Feature Engineering applied
+- 📈 Graphs and heatmaps for analysis
 
 ---
 
 ## 📁 Dataset Overview
 
-The dataset consists of the following features:
+The dataset contains:
 
-| Feature          | Description |
-|------------------|-------------|
-| `Fan`            | Number of fans in the residence |
-| `Refrigerator`   | Number of refrigerators |
-| `AirConditioner` | Number of air conditioners |
-| `Television`     | Number of televisions |
-| `Monitor`        | Number of monitors or computers |
-| `MotorPump`      | Number of motor pumps used |
-| `Month`          | The month (1-12) for which electricity is being measured |
-| `City`           | The city where the household is located |
-| `Company`        | The electricity provider |
-| `MonthlyHours`   | Total usage hours of all appliances in that month |
-| `TariffRate`     | Cost per unit hour of electricity |
-| `ElectricityBill`| (Target) The actual electricity bill in currency units |
-
----
-
-## 🧠 Models Used
-
-We experimented with multiple models:
-
-- 📈 **Linear Regression**
-- 🌳 **Decision Tree Regressor**
-- 🌲 **Random Forest Regressor** ✅ *(Best performer)*
-- 🚀 **XGBoost Regressor** *(optional, if allowed)*
+| Feature         | Description                                            |
+|----------------|--------------------------------------------------------|
+| Fan            | Number of fans                                         |
+| Refrigerator   | Number of refrigerators                                |
+| AirConditioner | Number of air conditioners                             |
+| Television     | Number of TVs                                          |
+| Monitor        | Number of monitors                                     |
+| MotorPump      | Number of motor pumps                                  |
+| MonthlyHours   | Appliance usage hours per month                        |
+| TariffRate     | Electricity rate per unit (kWh)                        |
+| City           | City name (label encoded)                              |
+| Company        | Electricity board (label encoded)                      |
+| Month          | Month of the year                                      |
+| ElectricityBill| The actual electricity cost for the month              |
 
 ---
 
-## 🔬 Feature Engineering
+## 🧠 Feature Engineering
 
-We created two additional features:
+Feature engineering means creating **new useful features** from the existing ones to help the model learn better.
 
-- `Total_Appliances`: Sum of all appliances used  
-- `Usage_Intensity`: `MonthlyHours × TariffRate` (approximate cost factor)
+### ✨ Custom Features Added
 
----
-
-## ✅ Final Model: Random Forest Regressor
-
-**Why Random Forest?**  
-It’s an ensemble of decision trees that automatically captures interactions like `Fan × TariffRate`, handles non-linearities, and is very robust without requiring deep feature tuning.
-
-**Results on validation set:**
-
-- ✅ **R² Score**: `0.99999945`
-- 📉 **RMSE**: Very low — near-zero prediction error.
-
-This level of performance indicates the model is **highly accurate** in predicting electricity costs.
-
----
-
-## 📊 Visualization
-
-![Scatter Plot](assets/scatter_plot.png)  
-*Plot of Predicted vs Actual Bill Values*
-
----
-
-## 📂 Files
-
-- `electricity_bill_dataset.csv` – Main dataset
-- `notebook.ipynb` – Code and model training
-- `my_submission.csv` – Final predictions for submission
-- `README.md` – This documentation
-
----
-
-## 🚀 How to Run
-
-1. Clone the repository  
-2. Install dependencies:  
-   ```bash
-   pip install -r requirements.txt
+- `totalAppliances`:  
+  Total number of appliances in the house  
+  ```python
+  df["totalAppliances"] = df[['Fan', 'Refrigerator', 'AirConditioner', 'Television', 'Monitor', 'MotorPump']].sum(axis=1)
