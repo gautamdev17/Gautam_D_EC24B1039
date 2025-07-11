@@ -1,0 +1,37 @@
+🔍 Project: Electricity Bill Prediction using Machine Learning
+
+📁 Dataset:
+  - electricity_bill_dataset.csv
+  - Contains:
+    • Appliance counts (Fan, AC, TV, etc.)
+    • MonthlyHours (electricity usage duration)
+    • TariffRate (price per unit)
+    • City and Company info
+    • Target variable: ElectricityBill
+
+🧠 Models Tested & Their R² Scores:
+  1. ✅ Random Forest Regressor       → 0.9999755665317055  ✅ Best Model
+  2. 🌳 Decision Tree Regressor       → 0.9999118343410605
+  3. 📉 Linear Regression             → 0.9956378681437017
+
+📐 Feature Engineering Done:
+  - `totalAppliances` = sum of all 6 appliance columns
+  - `CostPerAppliance` = ElectricityBill / totalAppliances
+  - `IsSummer` (binary: 1 if month is Mar–May) → removed, as it reduced performance
+
+📊 Evaluation Metrics:
+  - R² Score → measures model accuracy (closer to 1 = better)
+  - RMSE     → how far predictions deviate from actual values
+
+📈 Visualizations Included:
+  - Actual vs Predicted Scatter Plot
+  - Correlation Heatmap (Top 10 features excluding approx_monthly_bill)
+
+🛠️ Tools Used:
+  - Python
+  - pandas, numpy, matplotlib, seaborn
+  - scikit-learn
+
+🚀 Final Model:
+  - **Random Forest Regressor**
+  - Reason: Highest R² score, handles nonlinear patterns, automatically captures feature interactions (like Fan × TariffRate)
